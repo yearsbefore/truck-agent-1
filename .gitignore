@@ -1,0 +1,23 @@
+# 密钥文件（绝对不能上传）
+.env
+
+# 虚拟环境
+venv/
+.venv/
+
+# 数据库文件
+database/trucks.db
+
+# 向量数据库（自动生成）
+regulations/vector_store/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store

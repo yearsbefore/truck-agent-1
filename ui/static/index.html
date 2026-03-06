@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truck Engineering AI Agent</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { background-color: #f4f5f7; }
+  #chat-box { overflow-y: auto; padding: 1rem; flex-grow: 1; }
+  .message { margin-bottom: 1rem; padding: 0.5rem 1rem; border-radius: 0.75rem; max-width: 70%; }
+  .user { background-color: #2563eb; color: white; align-self: flex-end; }
+  .assistant { background-color: #e5e7eb; color: #111827; align-self: flex-start; }
+  #sidebar { min-width: 280px; max-width: 300px; background-color: white; padding: 1rem; border-right: 1px solid #d1d5db; }
+  #sidebar button { width: 100%; margin-top: 0.25rem; margin-bottom: 0.25rem; }
+</style>
+</head>
+<body class="flex h-screen">
+
+<!-- Sidebar -->
+<div id="sidebar" class="flex flex-col">
+  <h2 class="text-xl font-bold mb-2">🚛 Truck Engineering Assistant</h2>
+  <hr class="mb-2">
+  <div class="mb-2">
+    <p class="font-semibold">Capabilities:</p>
+    <ul class="list-disc list-inside text-gray-700">
+      <li>🗄️ Database Query — Search truck models, specs, and brands</li>
+      <li>🔧 CATIA Control — Open models, modify parameters, export files</li>
+      <li>📋 Regulation Check — Verify compliance for EU / US / CN / UK</li>
+    </ul>
+  </div>
+  <hr class="mb-2">
+  <div class="mb-2">
+    <p class="font-semibold">Example Questions:</p>
+    <div id="examples" class="flex flex-col"></div>
+  </div>
+  <hr class="mb-2">
+  <button id="clear-btn" class="bg-gray-400 text-white px-2 py-1 rounded hover:bg-gray-500">Clear Chat</button>
+</div>
+
+<!-- Main chat area -->
+<div class="flex flex-col flex-grow">
+  <div class="p-4 bg-white shadow">
+    <h1 class="text-2xl font-bold">🚛 Truck Engineering AI Agent</h1>
+    <p class="text-gray-500">Database Query · CATIA Control · Regulation Check</p>
+  </div>
+  <div id="chat-box" class="flex flex-col p-4 space-y-2"></div>
+  <div class="p-4 bg-white flex gap-2 shadow">
+    <input id="user-input" class="flex-1 border rounded p-2" type="text" placeholder="Enter your request...">
+    <button id="send-btn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Send</button>
+  </div>
+</div>
+
+<script>
+const chatBox = document.getElementById('chat-box');
+const input = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
+const clearBtn = document.getElementById('clear-btn');
+const examplesDiv = document.getElementById('examples');
+
+const examples = [
+  "Find all heavy trucks with payload over 25 tons",
+  "What Volvo models are available?",
+  "Does this truck comply with EU regulations: length 17m width 2.5m height 3.9m weight 38 tons?",
+  "Open the CATIA chassis model",
+  "Check all regions: length 18m width 2.55m height 4m weight 45 tons",
+];
+
+// 添加示例按钮
+examples.forEach(text => {
+  const btn = document.createElement('button');
+  btn.textContent = text;
+  btn.className = 'bg-gray-200 text-gray-800 px-2 py-1 rounded hover:bg-gray-300';
+  btn.addEventListener('click', () => {
+    input.value = text;
+    sendMessage();
+  });
+  examplesDiv.appendChild(btn);
+});
+
+function addMessage(text, role) {
+  const msgDiv = document.createElement('div');
+  msgDiv.classList.add('message', role);
+  msgDiv.textContent = text;
+  chatBox.appendChild(msgDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+async function sendMessage() {
+  const msg = input.value.trim();
+  if (!msg) return;
+  addMessage(msg, 'user');
+  input.value = '';
+
+  const temp = document.createElement('div');
+  temp.classList.add('message', 'assistant');
+  temp.textContent = 'Thinking...';
+  chatBox.appendChild(temp);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg })
+    });
+    const data = await res.json();
+    temp.textContent = data.answer || data.error || 'No response';
+  } catch (err) {
+    temp.textContent = 'Error: ' + err.message;
+  }
+}
+
+// 清空聊天
+clearBtn.addEventListener('click', () => {
+  chatBox.innerHTML = '';
+  fetch('/api/reset', { method: 'POST' });
+});
+
+sendBtn.addEventListener('click', sendMessage);
+input.addEventListener('keydown', e => { if(e.key === 'Enter') sendMessage(); });
+</script>
+
+</body>
+</html>
