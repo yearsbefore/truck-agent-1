@@ -43,31 +43,31 @@ CATIA_MODE=mock
 
 ```
 truck_agent/
-├── .env                    # Your config (do not commit to Git)
-├── .env.example            # Config template
+│
+├── .env                  # Your config (do not commit to Git)
+├── .env.example          # Config template
 ├── requirements.txt
-├── start.sh                # One-click start (Mac)
-├── start.bat               # One-click start (Windows)
+├── start.sh              # One-click start (Mac)
+├── start.bat             # One-click start (Windows)
 ├── main.py
 │
 ├── agent/
-│   ├── core.py             # Agent assembly (LLM + Tools)
-│   └── prompts.py          # System prompt
+│   ├── core.py           # Agent assembly (LLM + Tools)
+│   └── prompts.py        # System prompt
 │
 ├── tools/
-│   ├── db_tool.py          # Tool 1: Database query
-│   ├── catia_tool.py       # Tool 2: CATIA control
-│   └── regulation_tool.py  # Tool 3: Regulation check
+│   ├── db_tool.py        # Tool 1: Database query
+│   ├── catia_tool.py     # Tool 2: CATIA control
+│   └── regulation_tool.py# Tool 3: Regulation check
 │
 ├── database/
-│   ├── init_db.py          # Database initialization script
-│   └── trucks.db           # SQLite database (auto-generated)
+│   ├── init_db.py        # Database initialization script
+│   └── trucks.db         # SQLite database (auto-generated)
 │
 └── ui/
-    └── app.py              # Streamlit interface
+    └── app.py            # Streamlit interface
 ```
 
----
 
 ## CATIA Integration
 
