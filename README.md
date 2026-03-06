@@ -34,14 +34,15 @@ venv/bin/streamlit run ui/app.py
 Copy `.env.example` to `.env` and fill in your API key:
 
 ```
-OPENROUTER_API_KEY=sk-or-your-key-here
-MODEL_NAME=meta-llama/llama-3.3-70b-instruct:free
-CATIA_MODE=mock
+ZURE_OPENAI_API_KEY=xxxxxxxxxxxx
+AZURE_OPENAI_ENDPOINT=https://api.volvogenaihubqa.volvogroup.net/azure-openai-data-inference
+AZURE_OPENAI_API_VERSION=2024-06-01
+AZURE_OPENAI_DEPLOYMENT=gpt-5-nano_gb_2025-08-07
 
 
 ## Project Structure
 
-```
+
 truck_agent/
 │
 ├── .env                  # Your config (do not commit to Git)
