@@ -38,11 +38,11 @@ ZURE_OPENAI_API_KEY=xxxxxxxxxxxx
 AZURE_OPENAI_ENDPOINT=https://api.volvogenaihubqa.volvogroup.net/azure-openai-data-inference
 AZURE_OPENAI_API_VERSION=2024-06-01
 AZURE_OPENAI_DEPLOYMENT=gpt-5-nano_gb_2025-08-07
-
+```
 
 ## Project Structure
 
-
+```
 truck_agent/
 │
 ├── .env                  # Your config (do not commit to Git)
