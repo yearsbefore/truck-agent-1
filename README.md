@@ -37,11 +37,7 @@ Copy `.env.example` to `.env` and fill in your API key:
 OPENROUTER_API_KEY=sk-or-your-key-here
 MODEL_NAME=meta-llama/llama-3.3-70b-instruct:free
 CATIA_MODE=mock
-```
 
-Get your API key at: https://openrouter.ai
-
----
 
 ## Project Structure
 
