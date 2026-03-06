@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Truck Engineering AI Agent
 
 An AI Agent built with LangChain + OpenRouter for truck engineering tasks.
@@ -80,3 +81,6 @@ To connect real CATIA:
 1. Ensure CATIA is installed and running (Windows only)
 2. Set `CATIA_MODE=real` in `.env`
 3. Install pywin32: `pip install pywin32`
+=======
+# truck-agent-1
+>>>>>>> 73606bf7df2af0c37422efec2f23676bcf0917b8
